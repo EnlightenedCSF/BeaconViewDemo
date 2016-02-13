@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using TrilaterationDemo.Model;
 
 namespace TrilaterationDemo.TrilateratingStrategy
 {
-    //TODO: продебажить ситуацию с 8О
     /// <summary>
     /// Enhanced Positioning Trilateration Algorithm
     /// </summary>
     public class EptaStrategy : AbstractStrategy
     {
+        public List<PointF> Intersections { get; private set; }
+        public PointF Result { get; set; }
+
         private const double KStep = 0.05f; 
 
         public EptaStrategy(Floor floor) : base(floor)
         {
+            Result = new PointF(0, 0);
         }
 
         private static List<Beacon> GetCopy(IEnumerable<Beacon> beacons)
@@ -35,6 +37,28 @@ namespace TrilaterationDemo.TrilateratingStrategy
             };
 
         public override PointF CalculateUserPosition()
+        {
+            var beacons = GetCopy(Floor.GetFloor().Beacons);
+
+            var iterations = 1;
+            while (true)
+            {
+                iterations++;
+                if (iterations > 1000)
+                {
+                    return new PointF(-100, -100);
+                }
+
+                Intersections = GetIntersectionPoints(beacons).Where(p => IsPointBelongToAllCircles(p, beacons)).ToList();
+                if (Intersections.Count == 2 || Intersections.Count == 3)
+                {
+                    return GetCenter(Intersections);
+                }
+                beacons.ForEach(beacon => beacon.Accuracy *= 1.1f);
+            }
+        }
+
+        /*public override PointF CalculateUserPosition()
         {
             var beacons = GetCopy(Floor.GetFloor().Beacons);
 
@@ -85,8 +109,8 @@ namespace TrilaterationDemo.TrilateratingStrategy
                 }
             }
             return center;
-        }
-
+        }*/
+        /*
         private static bool IsOneIsTooBig(List<Beacon> beacons)
         {
             beacons.Sort((b1, b2) => b1.Accuracy > b2.Accuracy ? -1 : 1);
@@ -106,12 +130,10 @@ namespace TrilaterationDemo.TrilateratingStrategy
                     }
                 }
                 result &= isAllIn;
-                if (result)
-                    return true;
             }
             return result;
         }
-
+        */
         private static IEnumerable<PointF> GetIntersectionPoints(IReadOnlyList<Beacon> beacons)
         {
             var res = new List<PointF>();

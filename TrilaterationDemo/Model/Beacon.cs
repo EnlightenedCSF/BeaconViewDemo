@@ -18,5 +18,10 @@ namespace TrilaterationDemo.Model
         {
             return new PointF(X, Y);
         }
+
+        public override string ToString()
+        {
+            return "X: " + X + "; Y: " + Y + "; Acc: " + Accuracy;
+        }
     }
 }

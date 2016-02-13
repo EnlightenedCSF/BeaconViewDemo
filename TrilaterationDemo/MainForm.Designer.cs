@@ -38,8 +38,15 @@ namespace TrilaterationDemo
             this.rBtnPowerCenter = new System.Windows.Forms.RadioButton();
             this.rBtnRayTracing = new System.Windows.Forms.RadioButton();
             this.rBtnTrilateration = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblResult = new System.Windows.Forms.Label();
+            this.lblBeacon3 = new System.Windows.Forms.Label();
+            this.lblBeacon2 = new System.Windows.Forms.Label();
+            this.lblBeacon1 = new System.Windows.Forms.Label();
+            this.log = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxTrilateration)).BeginInit();
             this.panelTrilaterationMethods.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // picBoxTrilateration
@@ -132,11 +139,68 @@ namespace TrilaterationDemo
             this.rBtnTrilateration.UseVisualStyleBackColor = true;
             this.rBtnTrilateration.CheckedChanged += new System.EventHandler(this.rBtnMethod_CheckedChanged);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.log);
+            this.panel1.Controls.Add(this.lblResult);
+            this.panel1.Controls.Add(this.lblBeacon3);
+            this.panel1.Controls.Add(this.lblBeacon2);
+            this.panel1.Controls.Add(this.lblBeacon1);
+            this.panel1.Location = new System.Drawing.Point(683, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(279, 486);
+            this.panel1.TabIndex = 3;
+            // 
+            // lblResult
+            // 
+            this.lblResult.AutoSize = true;
+            this.lblResult.Location = new System.Drawing.Point(18, 125);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(35, 13);
+            this.lblResult.TabIndex = 3;
+            this.lblResult.Text = "label1";
+            // 
+            // lblBeacon3
+            // 
+            this.lblBeacon3.AutoSize = true;
+            this.lblBeacon3.Location = new System.Drawing.Point(18, 87);
+            this.lblBeacon3.Name = "lblBeacon3";
+            this.lblBeacon3.Size = new System.Drawing.Size(35, 13);
+            this.lblBeacon3.TabIndex = 2;
+            this.lblBeacon3.Text = "label3";
+            // 
+            // lblBeacon2
+            // 
+            this.lblBeacon2.AutoSize = true;
+            this.lblBeacon2.Location = new System.Drawing.Point(18, 51);
+            this.lblBeacon2.Name = "lblBeacon2";
+            this.lblBeacon2.Size = new System.Drawing.Size(35, 13);
+            this.lblBeacon2.TabIndex = 1;
+            this.lblBeacon2.Text = "label2";
+            // 
+            // lblBeacon1
+            // 
+            this.lblBeacon1.AutoSize = true;
+            this.lblBeacon1.Location = new System.Drawing.Point(18, 17);
+            this.lblBeacon1.Name = "lblBeacon1";
+            this.lblBeacon1.Size = new System.Drawing.Size(35, 13);
+            this.lblBeacon1.TabIndex = 0;
+            this.lblBeacon1.Text = "label1";
+            // 
+            // log
+            // 
+            this.log.Location = new System.Drawing.Point(3, 141);
+            this.log.Multiline = true;
+            this.log.Name = "log";
+            this.log.Size = new System.Drawing.Size(273, 342);
+            this.log.TabIndex = 4;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 510);
+            this.ClientSize = new System.Drawing.Size(974, 510);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelTrilaterationMethods);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.picBoxTrilateration);
@@ -146,6 +210,8 @@ namespace TrilaterationDemo
             ((System.ComponentModel.ISupportInitialize)(this.picBoxTrilateration)).EndInit();
             this.panelTrilaterationMethods.ResumeLayout(false);
             this.panelTrilaterationMethods.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -160,6 +226,12 @@ namespace TrilaterationDemo
         private System.Windows.Forms.RadioButton rBtnTrilateration;
         private System.Windows.Forms.RadioButton rBtnBoth;
         private System.Windows.Forms.RadioButton rBtnEPTA;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblBeacon3;
+        private System.Windows.Forms.Label lblBeacon2;
+        private System.Windows.Forms.Label lblBeacon1;
+        private System.Windows.Forms.Label lblResult;
+        private System.Windows.Forms.TextBox log;
     }
 }
 

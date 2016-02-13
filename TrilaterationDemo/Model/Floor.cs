@@ -17,7 +17,7 @@ namespace TrilaterationDemo.Model
 
         private Floor()
         {
-            _strategies = new List<AbstractStrategy>(3)
+            Strategies = new List<AbstractStrategy>(3)
             {
                 new TrilaterationStrategy(this),
                 new RayTracingStrategy(this),
@@ -28,7 +28,7 @@ namespace TrilaterationDemo.Model
         }
         #endregion
 
-        private readonly List<AbstractStrategy> _strategies;
+        public List<AbstractStrategy> Strategies { get; set; }
         private int _usingStrategyIndex;
 
         public List<Beacon> Beacons { get; private set; }
@@ -66,13 +66,13 @@ namespace TrilaterationDemo.Model
         {
             if (!IsUsingBothStrategies)
             {
-                UserPositions[0] = _strategies[_usingStrategyIndex].CalculateUserPosition();
+                UserPositions[0] = Strategies[_usingStrategyIndex].CalculateUserPosition();
             }
             else
             {
-                for (var i = 0; i < _strategies.Count; i++)
+                for (var i = 0; i < Strategies.Count; i++)
                 {
-                    UserPositions[i] = _strategies[i].CalculateUserPosition();
+                    UserPositions[i] = Strategies[i].CalculateUserPosition();
                 }
             }
         }

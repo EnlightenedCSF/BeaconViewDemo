@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TrilaterationDemo.Model;
 using TrilaterationDemo.Presenters;
 using TrilaterationDemo.Properties;
+using TrilaterationDemo.TrilateratingStrategy;
 
 namespace TrilaterationDemo
 {
@@ -46,13 +48,46 @@ namespace TrilaterationDemo
             _drawer = new GraphDrawer(_bitmap, at);
             */
 
-            picBoxTrilateration.MouseDown += (o, args) => { _drawer.OnMouseDown(args.X, args.Y); picBoxTrilateration.Invalidate(); };
-            picBoxTrilateration.MouseMove += (o, args) => { _drawer.OnMouseMove(args.X, args.Y); picBoxTrilateration.Invalidate(); };
-            picBoxTrilateration.MouseUp += (o, args) => { _drawer.OnMouseUp(); picBoxTrilateration.Invalidate(); };
+            picBoxTrilateration.MouseDown += (o, args) => { 
+                _drawer.OnMouseDown(args.X, args.Y); 
+                picBoxTrilateration.Invalidate();
+                RefreshLabels();
+            };
+
+            picBoxTrilateration.MouseMove += (o, args) =>
+            {
+                _drawer.OnMouseMove(args.X, args.Y); 
+                picBoxTrilateration.Invalidate();
+                RefreshLabels();
+            };
+
+            picBoxTrilateration.MouseUp += (o, args) =>
+            {
+                _drawer.OnMouseUp(); 
+                picBoxTrilateration.Invalidate();
+                RefreshLabels();
+            };
             
             /*
             _drawer.SetNeedsDisplay();
             picBoxTrilateration.Invalidate();*/
+        }
+
+        private void RefreshLabels()
+        {
+            lblBeacon1.Text = Floor.GetFloor().Beacons[0].ToString();
+            lblBeacon2.Text = Floor.GetFloor().Beacons[1].ToString();
+            lblBeacon3.Text = Floor.GetFloor().Beacons[2].ToString();
+
+            lblResult.Text = Floor.GetFloor().UserPositions[0].ToString();
+
+            log.Clear();
+            var epta = Floor.GetFloor().Strategies[3] as EptaStrategy ?? new EptaStrategy(null);
+            var intersections = epta.Intersections ?? new List<PointF>();
+            foreach (var point in intersections)
+            {
+                log.AppendText(point + "\n");
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
